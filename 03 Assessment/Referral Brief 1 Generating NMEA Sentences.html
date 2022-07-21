@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html id="top" lang="en"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, user-scalable=yes, minimum-scale=1, width=device-width, height=device-height">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="/shared/template/!USER TEMPLATES/../css/stylesheet.css" type="text/css" rel="stylesheet">
+	<link href="/shared/template/!USER TEMPLATES/../css/print.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+</head>
+<body>
+<h1>Referral Assignment 1 Brief</h1>
+<main>
+<h2>1. Assessment Specification</h2>
+<table>
+<tbody>
+<tr>
+<th scope="row" style="text-align: center;"><strong>ASSIGNMENT TITLE</strong></th>
+<td>Generating NMEA Sentences</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>LEARNING OUTCOMES ASSESSED</strong></th>
+<td><strong>K2</strong>: Demonstrate awareness of code-quality issues.<br><strong>S1</strong>: Use a variety of software tools and technologies for software development.<br><strong>S2</strong>: Design and implement robust software components.<br><strong>S3</strong>: Contribute to team-based software-development projects.<br><strong>S4</strong>: Interact effectively with version-control systems and continuous-integration servers.<br><strong>S5</strong>: Demonstrate proficiency with modern software-development practices.<br><strong>S6</strong>: Choose appropriate structures and library components.</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>CONTRIBUTION TO MODULE</strong></th>
+<td>70%</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>DATE SET</strong></th>
+<td>Friday 1st July 2022</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>SUBMISSION DEADLINE</strong></th>
+<td>2:30pm, Friday 19th August 2022</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>METHOD OF SUBMISSION</strong></th>
+<td>NOW Dropbox Folder</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>DATE OF FEEDBACK</strong></th>
+<td>After the September Exam Board</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>METHOD OF FEEDBACK</strong></th>
+<td>Electronic via NOW; Verbal feedback available on request</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Assessment Requirements</h2>
+<p>This assignment is an exercise in <strong><em>test-based</em></strong> <strong><em>code refactoring</em></strong> (see Section 3.2). You may also employ the practice of <em><strong>pair programming</strong></em> [9,10] while refactoring your code (see Section 3.3). Using these practices, you will improve the quality of some pre-existing C++ code (see Section 3.5).</p>
+<p>You are required to make use of the Git version-control software to manage your source code during development (see Section 3.4). You are also <em><strong>individually</strong></em> required to use a Jenkins continuous-integration server to monitor the automated test program in your Git repository (see Section 3.6).</p>
+<h3>2.1 Deliverables</h3>
+<p>You are required to:</p>
+<ol>
+<li>create a Git repository on Olympuss (see Section 3.6), and use this repository for code development;</li>
+<li><em><strong>individually</strong></em>, create and configure Jenkins job(s) that monitor your repository;</li>
+<li>produce an updated version of the provided 'gridworld-route.cpp' C++ file;</li>
+<li>export a copy of your final Git log from your repository.</li>
+</ol>
+<ol>
+<li style="list-style-type: none;"></li>
+</ol>
+<h3>2.2 Submission Instructions</h3>
+<p>If you employ pair programming, then your source code will be shared with a partner. Nonetheless, both members of the pair should submit to the NOW dropbox folder:</p>
+<ul>
+<li>A <em><strong>plain text file</strong></em> containing your Git log.</li>
+<li>The updated 'gridworld-route.cpp' file.</li>
+<li>Any other additional/modified source files that are needed by the automated test program (including the updated 'NMEA_Generator-Tests.pro' file if any new files have been added to the program).</li>
+</ul>
+<p><strong>Do not submit any <em>Makefile</em>, binary files, or unmodified source files.</strong></p>
+<p>When making the submission, in the 'Comments' box you should state:</p>
+<ul>
+<li>whether you worked alone or with a partner;</li>
+<li>the name of your partner(s), if any;</li>
+<li>the URL of your Git repository on Olympuss;</li>
+<li>the URL(s) of your <em><strong>individual</strong></em> Jenkins job(s).</li>
+</ul>
+<p>Finally, ensure that you have:</p>
+<ul>
+<li>committed and pushed the latest version of your source files to your Git repository on Olympuss;</li>
+<li>granted the module leader access to the repository (username: cmp3scultna).</li>
+</ul>
+<h2>3. Assignment Instructions</h2>
+<h3>3.1 Context: NMEA Sentences</h3>
+<p>This assignment involves working with functionality that generates Global Positioning System (GPS) data as '<em>NMEA Sentences</em>', which are a family of data formats structured according to a standard defined by the National Marine Electronics Association [1].</p>
+<ul></ul>
+<ul></ul>
+<p>The NMEA standard defines numerous sentence formats. While the official standard describing the individual sentence formats is not freely available, there are numerous sources of unofficial documentation available online (e.g. [2, 3]).</p>
+<h3>3.2 Test-based Code Refactoring</h3>
+<p>You are not required to develop the NMEA Generator functionality yourself — a complete definition of a C++ function that generates NMEA Sentences is provided for you. However, the quality of the code within the function definition is very poor.&nbsp;</p>
+<p><em><strong>Code refactoring</strong></em> is the act of modifying source code to improve its quality, without adding or changing any existing functionality. <em><strong></strong></em>For this assignment, you are required to refactor the provided (poor-quality) definition of the function.</p>
+<p>A suite of Boost UTF automated tests is provided for this function, and all the tests currently pass. You should ensure that all of these tests still pass after you have refactored the function definition. Good practice is to run the tests after each refactoring step, to ensure that no bugs have been introduced into the code.</p>
+<h3>3.3 Pair Programming [Optional]</h3>
+<p>You are permitted to work in a pair and employ the software-engineering practice of <strong><em>pair programming</em></strong> [9,10]. However, if you prefer to work individually, then that is also permitted.</p>
+<p>You may arrange your own partner for this assignment. If there is an odd person leftover without a partner, then you may instead form a group of three. Note however that pair programming works best in pairs, so you should try to form pairs wherever possible. To facilitate finding a partner for this assignment, there is a '<em>Pairs for Referral 1</em>' conversation thread in the '<em>Pair Programming</em>' channel on Microsoft Teams.</p>
+<p>Note that if you work as a pair (or three), then <strong><em>you must</em></strong> employ the pair-programming practice. You are <strong><em>not</em></strong> permitted to work independently at different times. However, you may split from your partner mid-way through if you decide that you are not finding pair-programming productive, and work individually thereafter. You should not continue to work with a partner who is not contributing to the pair programming.</p>
+<h3>3.4 Version Control</h3>
+<p>The codebase for this assignment is available in the following Git repository:</p>
+<pre style="text-align: center;"><a href="https://olympuss.ntu.ac.uk/soft20111/gps" target="_blank" rel="noopener">https://olympuss.ntu.ac.uk/soft20111/gps</a></pre>
+<p>You should make a fork of this Git repository on Olympuss. (If you already have a fork from a previous assignment for this module, then you may need to delete that previous fork first.)</p>
+<p>Then, in the repository 'Settings', you should update the 'Collaborators &amp; teams' as follows:</p>
+<ul>
+<li>Grant 'admin' access to the module leader (username: cmp3scultna).</li>
+<li><span style="color: #cc0000;"><strong>Revoke access for any student teams that initially have access (if any).</strong></span></li>
+</ul>
+<p>The code for the tasks in this assignment is in the branch named '<strong>referral</strong>'. You will need to switch to that branch in your local clone of the repository before beginning the code refactoring.</p>
+<p>During refactoring, you should regularly and systematically commit your work. Good practice is to commit after each step of refactoring. Use informative commit messages — remember that you are required to submit the final Git log.</p>
+<h3>3.5 Provided Codebase</h3>
+<p>The repository contains a small C++ codebase supporting the construction of structured data representing geographical positions.</p>
+<p>The parts of the codebase that are the focus of this assignment are:</p>
+<ul>
+<li>The 'GridWorld::Route::toNMEA()' function in the 'src/gridworld/gridworld-route.cpp' file.</li>
+<li>A Boost UTF test suite, in the 'tests/gridworld/gridworld-route-tests.cpp' file.</li>
+<li>A Qt project named 'NMEA_Generator-Tests.pro', providing the configuration for the automated test program.</li>
+</ul>
+<p>You are tasked with refactoring the (poor quality) definition of the 'toNMEA()' function.</p>
+<p>Clarifications:</p>
+<ul>
+<li>You may make use of components from the C++ standard library, and may also use components from the Boost libraries.</li>
+<li>You may define additional functions (or structs or classes), either within 'gridworld-route-tests.cpp' or elsewhere in the codebase.</li>
+</ul>
+<h3>3.6 Using Jenkins to Monitor the Repository</h3>
+<p>You are required to create and configure Jenkins job(s) that build and run the 'NMEA_Generator-Tests' program. After each commit, you should push to your remote Git repository on Olympuss so that Jenkins can record the result of the build/run.</p>
+<p><strong>Note: to demonstrate your individual ability to use Jenkins, you are required to <em>separately</em> create and configure these jobs, even if you are working as a pair for the code refactoring.</strong></p>
+<p>Additional instructions/clarifications:</p>
+<ul>
+<li>The job(s) should be created on the 'tonga' server:</li>
+</ul>
+<pre style="text-align: center;"><a href="https://tonga.ntu.ac.uk/" target="_blank" rel="noopener">https://tonga.ntu.ac.uk/</a></pre>
+<ul>
+<li>On tonga, create a folder named either as your student identifier or your name. Your job(s) should be created in that folder.</li>
+<li>The job(s) should run on the 'Ganges' node.</li>
+<li>You will need to instruct Jenkins to use the '<strong>referral</strong>' branch of the Git repository.</li>
+<li>You should <em><strong>not</strong></em> commit <strong><em>generated</em></strong> files to the Git repository for use by the job(s).</li>
+<li>You should try to ensure that each<em></em> run of the job(s) succeeds.</li>
+</ul>
+<p>For a high grade:</p>
+<ul>
+<li>The jobs should be set up before you begin to refactor the C++ code.</li>
+<li>There should be two jobs sharing a 'workspace':
+<ul>
+<li>one job to build the test program;</li>
+<li>one job to run the test program;</li>
+</ul>
+</li>
+<li>The 'build' job should be automatically triggered whenever there is a push to the Git repository.</li>
+<li>The 'run' job should be automatically triggered whenever the 'build' job completes successfully.</li>
+</ul>
+<h2>4. Preparation and Feedback Opportunities</h2>
+<p>The module content from Weeks 1, 2, 4, 9, 12, 13, 15 &amp; 16 are particularly relevant for understanding what you are expected to do for this assignment. The weekly practice activities are designed to prepare you for this assignment, and you are strongly encouraged to complete the '<strong>Core</strong>' tasks from these weeks before attempting this assignment. The module content on code quality from from Weeks 17—20 also supports this assignment.</p>
+<p>Verbal formative feedback on the practice activities is available from the module leader over the summer — please contact the module leader to arrange a meeting when you are ready for feedback. You will receive written feedback on coursework submission, together with your awarded grade, after the Board of Examiners meet to determine your results. Further verbal feedback on your submission is available on request.</p>
+<h2>5. Resources that may be Useful</h2>
+<ul>
+<li>The "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2090749" target="_blank" rel="noopener">Git Basics</a>" guide provides a reference for all of the Git commands you will need.</li>
+<li>For guidance on using Jenkins, refer to the "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2186435" target="_blank" rel="noopener">Jenkins Basics</a>" guide.</li>
+<li>For guidance on installing Qt Creator and the Boost UTF on a personal machine, see the "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2161623" target="_blank" rel="noopener">Installing Qt Creator</a>" and "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2053100" target="_blank" rel="noopener">Installing the Boost UTF</a>" guides.</li>
+<li>For guidance on building Qt Creator projects, either within the IDE or at the command-line, refer to the "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2160326" target="_blank" rel="noopener">Qt Creator Basics</a>" guide.</li>
+<li>For help with the Boost UTF, refer to the "<a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=793918&amp;type=content&amp;rcode=ntu-2053097" target="_blank" rel="noopener">Boost UTF Basics</a>" guide.</li>
+<li>For code-quality advice, Chapters 2–5 and 17 of the textbook by Martin [7] are an excellent resource.</li>
+<li>You can read about pair programming in the online article by Böckeler and Siessegger [10] or the textbook by Williams and Kessler [9].</li>
+<li>If you are unsure how to write a reference to code taken from a web source, consult the NTU guide on citing references [5]. NTU also provides online advice for avoiding plagiarism [6].</li>
+</ul>
+<h2>6. Referencing, Plagiarism and Collusion</h2>
+<p>For this assignment you may work in a pair (or, exceptionally, a group of three). If you do so, then your code will be jointly authored. Furthermore, you may discuss the use of software-engineering tools with students outside of your pair. However, you should not directly copy code written by another student outside of your pair for this assessment — that is <em><strong>collusion</strong></em>.</p>
+<p><span style="color: #cc0000;"><strong>Important:</strong></span></p>
+<ul>
+<li><span style="color: #cc0000;"><strong>You should not give another student (outside of your pair) access to your source code — if they then copy it, even without your permission, you will be considered to have colluded.</strong></span><span style="color: #cc0000;"><strong></strong></span></li>
+<li><span style="color: #cc0000;"><strong>If you make a fork of the Git repository, then you should revoke access for any student teams that initially have access (if any).<br></strong></span></li>
+<li><span style="color: #cc0000;"><strong>If you created a new Git repository for this assignment (rather than making a fork), then ensure that repository is private!</strong></span></li>
+</ul>
+<p>If you reuse or adapt several lines of code written by another person to solve a particular problem, then you should provide a reference to the source of that code — failure to do so is <strong><em>plagiarism</em></strong>. For this assignment, references can be provided as code comments in the 'gridworld-route-tests.cpp' file.</p>
+<h2>7. Aspects for Professional Development</h2>
+<p>This assignment will give you experience using version-control software and automated test programs, and of employing the software-engineering practices of test-based code refactoring, and pair programming.</p>
+<h2>8. Assessment Criteria</h2>
+<p>You will be assessed on the following criteria:</p>
+<ul>
+<li>your use of Git for managing your code refactoring;</li>
+<li>the appropriateness of the Jenkins job(s) that you have created and configured.</li>
+<li>the quality of your code refactoring.</li>
+</ul>
+<h3>8.1 Git Use</h3>
+<p>You are being assessed on your ability to make professional use of version-control software to manage your source code during the development of the required functionality.</p>
+<table>
+<thead>
+<tr style="text-align: left; vertical-align: middle;">
+<td style="text-align: center;"><strong>Grade</strong></td>
+<td style="text-align: center;"><strong>Git Use Criteria (Weighting 20%)</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th style="text-align: center;">2:1</th>
+<td>Systematic and clearly documented history of numerous appropriate refactoring commits.</td>
+</tr>
+<tr>
+<th style="text-align: center;">2:2</th>
+<td>Several refactoring commits. The log messages usefully indicate the changes to a reader of the log.</td>
+</tr>
+<tr>
+<th style="text-align: center;">3rd</th>
+<td>Several commits have been made. The log messages may be too vague to be helpful to a reader of the log (e.g. "improved code").</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;">Marginal Fail</th>
+<td>Only two commits of changes to source files pushed <strong><em>OR</em></strong> several commits pushed, <strong><span style="color: #cc0000;">but access permissions allow the rest of the class access to the repository.</span></strong></td>
+</tr>
+<tr>
+<th style="text-align: center;">Mid Fail</th>
+<td>Only one commit of changes to source files pushed.</td>
+</tr>
+<tr>
+<th style="text-align: center;">Low Fail</th>
+<td>Files committed inappropriately (e.g. as a ZIP archive).</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;">Zero</th>
+<td>No commits pushed.</td>
+</tr>
+</tbody>
+</table>
+<h3>8.2 Jenkins Jobs</h3>
+<p>You are being assessed on your ability to use a continuous-integration server, and to set up appropriate and efficient jobs. For this aspect, the higher grade criteria are based on a number of marks, according to the following mark scheme:</p>
+<p>An appropriate 'build' job has been configured that:</p>
+<ul>
+<li><strong>[3 marks]</strong> is triggered automatically;</li>
+<li><strong>[2 marks]</strong> does not rely on any generated files being present in the repository or Jenkins workspace;</li>
+<li><strong>[2 marks]</strong> builds the latest version of the test program.</li>
+</ul>
+<p>An appropriate 'run' job has been configured that:</p>
+<ul>
+<li><strong>[1 mark]</strong> is triggered automatically when the build job completes;</li>
+<li><strong>[1 mark]</strong> does not access the Git repository;</li>
+<li><strong>[1 mark]</strong> does not build any files;</li>
+<li><strong>[1 mark]</strong> has a history of test runs throughout the duration of the development and refactoring process;</li>
+<li><strong>[1 mark]</strong> on the last run all tests pass;</li>
+<li><strong>[1 mark]</strong> on intermediate runs all tests pass.</li>
+</ul>
+<div>
+<table style="width: 100%; height: 492.8px;">
+<thead>
+<tr style="height: 22.4px;">
+<td style="text-align: center; width: 10.7364%; height: 22.4px;"><strong>Grade</strong></td>
+<td style="text-align: center; width: 85.938%; height: 22.4px;"><strong>Jenkins Jobs Criteria (Weighting 30%)</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;">Low 2:1</th>
+<td style="width: 85.938%; height: 22.4px;">12 marks</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;">High 2:2</th>
+<td style="width: 85.938%; height: 22.4px;">10 marks</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;">Mid 2:2</th>
+<td style="width: 85.938%; height: 22.4px;">8 marks</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;">Low 2:2</th>
+<td style="width: 85.938%; height: 22.4px;">6 marks</td>
+</tr>
+<tr style="height: 67.2px;">
+<th style="text-align: center; width: 10.7364%; height: 67.2px;">High 3rd</th>
+<td style="width: 85.938%; height: 67.2px;">Separate Jenkins jobs have been configured for building and running the test program, and have done so successfully on at least one run. The 'build' job may rely on a pre-generated <em>Makefile</em>. The 'run' job(s) may duplicate work from the 'build' job by building files or accessing the Git repository.</td>
+</tr>
+<tr style="height: 44.8px;">
+<th scope="row" style="text-align: center; width: 10.7364%; height: 44.8px;"><strong>Low 3rd</strong></th>
+<td style="width: 85.938%; height: 44.8px;">A Jenkins job has been configured that has, on at least one run, built the test program from the C++ source files and run the generated executable program.</td>
+</tr>
+<tr style="height: 44.8px;">
+<th style="text-align: center; width: 10.7364%; height: 44.8px;"><strong>Marginal Fail<br></strong></th>
+<td style="width: 85.938%; height: 44.8px;">A Jenkins job has been configured that has, on at least one run, built the test program from the C++ source files.</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;"><strong>Mid Fail<br></strong></th>
+<td style="width: 85.938%; height: 22.4px;">A Jenkins job has been configured that has, on at least one run, run a pre-built test program.</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;"><strong>Low Fail<br></strong></th>
+<td style="width: 85.938%; height: 22.4px;">A Jenkins job has been partially configured, but it has not built the test program.</td>
+</tr>
+<tr style="height: 22.4px;">
+<th style="text-align: center; width: 10.7364%; height: 22.4px;"><strong>Zero<br></strong></th>
+<td style="width: 85.938%; height: 22.4px;">No attempt at configuring a Jenkins job.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>8.3 Code Refactoring</h3>
+<p>You are being assessed on your ability to refactor code in a test-based manner. <span style="color: #cc0000;"><strong>Note that you <em>must</em> ensure that your submitted file compiles and allows the test program to build, and that the tests pass when run.</strong></span> This is because building and running the test program is an essential part of the test-based refactoring process.</p>
+<p><span style="color: #cc0000;"><strong>If tests fail after a refactoring step, then you should undo the change(s) until the tests are passing again.</strong></span></p>
+<p>You are also being assessed on the quality of your refactored code. For this assignment, the main code-quality aspects are being assessed are as follows:</p>
+<ul>
+<li>Choice of variable names (readability)</li>
+<li>Appropriateness of code comments (understandability)</li>
+<li>Naming constants (maintainability)</li>
+<li>Program decomposition (modularity)</li>
+</ul>
+<h4>8.3.1 Choice of variable names</h4>
+<p>You should improve the variable names such that they indicate their role in the code. If you have introduced additional functions/structs/classes, then your choice of names for those components is also assessed.</p>
+<h4>8.3.2 Code comments</h4>
+<p>Unhelpful code comments should be removed or improved. Helpful comments should be added to explain any non-obvious parts of the code. However, you should not add comments that just restate the code without adding helpful explanation.</p>
+<h4>8.3.3 Naming constants</h4>
+<p>Program constants that are derived from the software requirements should be stored in named constant variables (or composite data structures for groups of related values), rather than having unnamed 'magic' literals in the program code (unnamed numbers, strings or characters that affect the program control-flow).</p>
+<h4>8.3.4 Program Decomposition</h4>
+<p>High-quality code should be organised into numerous small and simple functions, rather than a single large complex function.</p>
+<table>
+<thead>
+<tr style="text-align: left; vertical-align: middle;">
+<td style="text-align: center;"><strong>Grade</strong></td>
+<td style="text-align: center;"><strong>Code Refactoring (Weighting 50%)</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th style="text-align: center;" scope="row"><strong>&nbsp;2:1</strong></th>
+<td>Refactoring improvements that substantially restructure the entire function definition (e.g. consistently merging duplicated code into auxiliary functions).</td>
+</tr>
+<tr>
+<th style="text-align: center;" scope="row"><strong>&nbsp;2:2</strong></th>
+<td>Refactoring improvements that substantially restructure isolated chunks of the code (e.g. using different language features / library components; introducing auxiliary functions; deleting unused code)</td>
+</tr>
+<tr>
+<th style="text-align: center;" scope="row"><strong>High 3rd<br></strong></th>
+<td>Refactoring improvements that partially restructure the code (e.g. introducing named constants; combining or splitting code across multiple lines; changing variable declaration locations).</td>
+</tr>
+<tr>
+<th scope="row" style="text-align: center;"><strong>Low 3rd</strong></th>
+<td>Refactoring improvements that indicate some understanding of the code logic (e.g. relevant improvements to variable names; helpful comments introduced).</td>
+</tr>
+<tr>
+<th style="text-align: center;"><strong>Marginal Fail<br></strong></th>
+<td><span style="color: #cc0000;"><em><strong>Some tests fail when run</strong></em></span> <em><strong>OR</strong> </em>refactoring improvements indicate misunderstandings of the code logic (e.g. changes to variable names, but new names are not indicative of their role; partially incorrect comments introduced)</td>
+</tr>
+<tr>
+<th style="text-align: center;"><strong>Mid Fail<br></strong></th>
+<td><strong><em><span style="color: #cc0000;">All tests fail when run</span></em></strong> <strong><em>OR</em></strong> refactoring improvements that are limited to those that do not require any understanding of the code logic (e.g. layout improvements; removal of old comments; correcting spelling of comments; namespace usage).</td>
+</tr>
+<tr>
+<th style="text-align: center;"><strong>Low Fail<br></strong></th>
+<td><span style="color: #cc0000;"><em><strong>The test program does not build</strong></em></span> <strong><em>OR</em></strong> refactoring improvements are very limited.</td>
+</tr>
+<tr>
+<th style="text-align: center;"><strong>Zero<br></strong></th>
+<td>No attempt has been made at refactoring the function.</td>
+</tr>
+</tbody>
+</table>
+<ul></ul>
+<h2>References</h2>
+<p>[1] NMEA 0183 interface standard, version 4.11. Standard, National Marine Electronics Association, 2018. URL: <a href="https://www.nmea.org/content/STANDARDS/NMEA_0183_Standard" target="_blank" rel="noopener">https://www.nmea.org/content/STANDARDS/NMEA_0183_Standard</a></p>
+<p>[2] Glenn Baddeley. GPS - NMEA sentence information, 2001. URL: <a href="http://aprs.gids.nl/nmea/" target="_blank" rel="noopener">http://aprs.gids.nl/nmea/</a>. [Accessed 16/12/20]</p>
+<p>[3] Eric Gakstatter. What Exactly Is GPS NMEA Data?, 2015. URL: <a href="https://www.gpsworld.com/what-exactly-is-gps-nmea-data/" target="_blank" rel="noopener">https://www.gpsworld.com/what-exactly-is-gps-nmea-data/</a>. [Accessed 16/12/20]</p>
+<p>[5] NTU Library. Citing references: A guide to NTU Library Harvard Style, 10th edition, 2016. URL: <a href="/d2l/le/content/52836/viewContent/1019510/View" target="_blank" rel="noopener">https://now.ntu.ac.uk/d2l/le/content/52836/viewContent/1019510/View</a></p>
+<p>[6] NTU. Copyright and plagiarism. URL:&nbsp;<a href="https://www.ntu.ac.uk/m/skills-for-success/copyright-and-plagiarism" target="_blank" rel="noopener">https://www.ntu.ac.uk/m/skills-for-success/copyright-and-plagiarism</a> [Accessed 06/12/20]</p>
+<p><a href="https://rl.talis.com/3/ntu/items/C9A7299D-DDD3-FF4A-F2FE-E8EC5FAA6872.html" target="_blank" rel="noopener">[7] Robert C. Martin. Clean Code: A Handbook of Agile Software Craftsmanship. Prentice Hall, 2008. ISBN: 978-0132350884</a></p>
+<p><a href="https://rl.talis.com/3/ntu/items/7945E21B-BC7A-B314-C351-0EA9ED404939.html" target="_blank" rel="noopener">[8] Bjarne Stroustrup. Programming: Principles and Practice Using C++. Addison-Wesley, 2nd edition, 2014. ISBN: 9780321992789</a></p>
+<p><a href="https://rl.talis.com/3/ntu/items/230BCA19-14A0-BCE8-8322-75A336BE6CB7.html" target="_blank" rel="noopener">[9] Laurie Williams and Robert Kessler. Pair Programming Illuminated. Addison-Wesley, 2002. ISBN: 978-0201745764</a></p>
+<p>[10] Birgitta Böckeler and Nina Siessegger. On Pair Programming. 2020. URL: <a href="https://martinfowler.com/articles/on-pair-programming.html" target="_blank" rel="noopener">https://martinfowler.com/articles/on-pair-programming.html</a>. [Accessed 05/01/20]</p>
+</main><footer>
+<p><a href="#top">Go to top</a></p>
+</footer>
+<p>
+<script src="/shared/template/!USER TEMPLATES/../js/responsive-content.js"></script>
+</p>
+</body></html>
